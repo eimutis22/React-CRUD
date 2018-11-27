@@ -4,28 +4,28 @@ import './App.css';
 
 class App extends Component {
 
-  onClick() {
-    alert('Clicked');
+  constructor(props) {
+    super(props);
+
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  onSubmit(event) {
+    event.preventDefault();
+    alert('Submitted!');
+
+    console.log('Username: ' + this.username.value);
+    console.log('Password: ' + this.password.value);
   }
 
   render() {
-    const list = [
-      'Item 1',
-      'Item 2',
-      'Item 3'
-    ];
-
     return (
       <div className="App">
-        <h1>
-          {
-            list.map(item => {
-              return(
-                <div onClick={this.onClick}>{item}</div>
-              );
-            })
-          }
-        </h1>
+        <form onSubmit={this.onSubmit}>
+          <input placeholder="Username" ref={input => this.username = input}/> 
+          <input placeholder="Password" ref={input => this.password = input}/>
+          <input type="submit" />
+        </form>
       </div>
     );
   }
