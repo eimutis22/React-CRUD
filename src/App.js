@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MyComponent from './MyComponent';
 import './App.css';
 
 class App extends Component {
@@ -26,6 +27,7 @@ class App extends Component {
         <div>
           <button onClick={this.onClick}>Click Here</button>
         </div>
+        <MyComponent />
       </div>
     );
   }
