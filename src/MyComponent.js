@@ -1,4 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
+const propTypes = {
+  title: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  onClick: PropTypes.func
+};
+
+const defaultProps = {
+  title: 'Default App Title'
+};
 
 class MyComponent extends Component {
   render() {
@@ -18,5 +29,8 @@ class MyComponent extends Component {
     );
   }
 }
+
+MyComponent.propTypes = propTypes;
+MyComponent.defaultProps = defaultProps;
 
 export default MyComponent;
