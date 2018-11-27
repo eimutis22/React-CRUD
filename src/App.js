@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
@@ -7,25 +6,26 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.onSubmit = this.onSubmit.bind(this);
+    this.state = {
+      title: 'Awesome Title'
+    }
+
+    this.onClick = this.onClick.bind(this);
   }
 
-  onSubmit(event) {
-    event.preventDefault();
-    alert('Submitted!');
-
-    console.log('Username: ' + this.username.value);
-    console.log('Password: ' + this.password.value);
+  onClick(event) {
+    this.setState({
+      title: 'New Updated Title!'
+    });
   }
 
   render() {
     return (
       <div className="App">
-        <form onSubmit={this.onSubmit}>
-          <input placeholder="Username" ref={input => this.username = input}/> 
-          <input placeholder="Password" ref={input => this.password = input}/>
-          <input type="submit" />
-        </form>
+        <h1>{this.state.title}</h1>
+        <div>
+          <button onClick={this.onClick}>Click Here</button>
+        </div>
       </div>
     );
   }
