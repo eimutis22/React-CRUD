@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReportItem from './ReportItem';
 import './App.css';
 
 const reports = [
@@ -36,18 +37,31 @@ class App extends Component {
     super(props);
 
     this.state = {
-      reports: []
+      reports: JSON.parse(localStorage.getItem('reports'))
     };
+
+    this.onDelete = this.onDelete.bind(this);
   }
   
   componentWillMount() {
-    this.getReports();    
+    const reports = this.getReports();    
+
+    this.setState({reports});
   }
 
   getReports() {
-    const localReports = JSON.parse(localStorage.getItem('reports'));
-    this.state.reports = localReports;
-    console.log('Reports: ', this.state.reports);
+    return this.state.reports;
+  }
+
+  onDelete(id) {
+    const reports = this.getReports();
+
+    const filteredReports = reports.filter(report => {
+      return report.id != id;
+    });
+
+    this.setState({ reports: filteredReports });
+    console.log(filteredReports);
   }
 
   render() {
@@ -57,9 +71,11 @@ class App extends Component {
         {
           this.state.reports.map(report => {
             return(
-              <div key={report.id}>
-                <span>{report.timestamp}</span> | <span>{report.product}</span> | <span>{report.issue}</span> | <span>{report.town}</span>
-              </div>
+              <ReportItem 
+                key={report.id}
+                {...report}
+                onDelete={this.onDelete}
+              />
             );
           })
         }
